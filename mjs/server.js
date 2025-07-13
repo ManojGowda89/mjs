@@ -1,14 +1,18 @@
 import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config(); 
 import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import fs from 'fs/promises';
 import { fileURLToPath } from 'url';
-import morgan from 'morgan';
-import dotenv from 'dotenv';
-dotenv.config();    
+import morgan from 'morgan';   
 import router from '../server/main.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const isDev = process.env.NODE_ENV !== 'production';
+
+const PORT = process.env.PORT || 8000;
 
 export const createApp = async (isDev = true) => {
   const app = express();
@@ -47,3 +51,6 @@ export const createApp = async (isDev = true) => {
 
   return app;
 };
+
+
+export { PORT, isDev };

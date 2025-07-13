@@ -1,21 +1,7 @@
+import { createApp, isDev, PORT } from "../mjs/server.js";
 
-import { PORT } from '../mjs/env.js';
-import { createApp } from '../mjs/server.js';
+const app = await createApp(isDev);
 
-const isDev = process.env.NODE_ENV !== 'production';
-
-
-
-
-
-
-
-const start = async () => {
-  const app = await createApp(isDev);
-
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-  });
-};
-
-start();
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
+});
